@@ -1,0 +1,7 @@
+pandas
+scipy
+numpy
+matplotlib
+seaborn
+tqdm
+tabulate
