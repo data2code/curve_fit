@@ -24,7 +24,25 @@ class IO:
 
         if 'model' in data:
             opt['MODEL']=data['model']
-        model_id=1 if opt['MODEL']=="A" else 2
+            if type(opt['MODEL']) is int:
+                if opt['MODEL']==1:
+                    opt['MODEL']='A'
+                    model_id=1
+                elif opt['MODEL']==4:
+                    opt['MODEL']='A'
+                    model_id=4
+                elif opt['MODEL']==2:
+                    opt['model']='B'
+                    model_id=2
+                else:
+                    util.error_msg(f"Bad model in the json file: {data['model']}")
+            else:
+                if opt['MODEL']=='A':
+                    model_id=1
+                elif opt['MODEL']=='B':
+                    model_id=2
+                else:
+                    util.error_msg(f"Bad model in the json file: {data['model']}")
 
         if 'bounds' in data:
             bounds=list(zip(*data['bounds']))

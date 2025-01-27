@@ -177,7 +177,9 @@ class DoseResponseFit(CurveFit):
             data['OUTLIER']=False
             data.loc[i, 'OUTLIER']=True
             res=self.fit(data, p0, locks, lb, ub)
+            debug(f"Try outlier i={i}, has_fit={res.has_fit()}, r2={res._d['r2']:.4g}, p=", res._d['p'])
             if res.has_fit(): ic50s.append(res._d['p'][2])
+            print(res._d['success'], best._d['r2'], res._d['r2'])
             if res._d['success'] and res._d['r2']>=self.LEAST_OUTLIER_R2 and res._d['r2']>best._d['r2']:
                 debug(f"DoseResponseFit.fit_outlier(): Better candidate found {i+1} of {n}: r2={res._d['r2']:.4g}, ic50={res._d['p'][2]:.4g}")
                 #res._dd.display()
